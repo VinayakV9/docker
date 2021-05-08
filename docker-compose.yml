@@ -1,0 +1,25 @@
+services:
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=my
+        ports: 
+            - "5432:5432"
+        volumes:
+            - postgres:/var/lib/postgresql/data
+    pgadmin:
+        image: dpage/pgadmin4 
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=default@gmail.com 
+            - PGADMIN_DEFAULT_PASSWORD=pass
+        ports:
+            - "8091:80"
+        volumes:
+            - pgadmin:/var/lib/pgadmin
+        depends_on:
+            - postgres
+volumes:
+    postgres:
+    pgadmin:
